@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 60f;
+    [SerializeField] private float uprightPower = 50f;
 
     private Transform viewer;
     private Rigidbody rb;
@@ -30,11 +31,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Upright() {
-        Vector3 goal = (Vector3.down).normalized;
+        Vector3 goal = Vector3.up;
         Vector3 current = transform.up;
         Vector3 axis = Vector3.Cross(goal, current);
 
-        Debug.Log(axis);
-        rb.AddTorque(axis*50, ForceMode.Force);
+        rb.AddTorque(axis * uprightPower, ForceMode.Force);
     }
 }
