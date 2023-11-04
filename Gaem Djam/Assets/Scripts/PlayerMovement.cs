@@ -3,41 +3,38 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement")]
-    [SerializeField] private float _speed;
+    [SerializeField] private float moveSpeed = 60f;
 
-    [Header("Camera Rotation")]
-    [SerializeField] private float _sensitivity;
-    private float _xRotation;
-    private float _yRotation;
-
-    // References
-    private Rigidbody _rb;
-    private Transform _camera;
+    private Transform viewer;
+    private Rigidbody rb;
 
     void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
-        _camera = Camera.main.transform;
+        viewer = transform.Find("Viewer");
+        rb = GetComponent<Rigidbody>();
+    }
+
+    void FixedUpdate()
+    {
+        rb.AddForce(GetInput() * moveSpeed, ForceMode.Acceleration); // Apply forces based off wasd
+        Upright();
     }
 
     void Update()
     {
-        Move();
-        MoveCamera();
+        if(Input.GetKeyDown(KeyCode.E)) { rb.AddTorque(transform.right * 10, ForceMode.Impulse); Debug.Log("HAH"); }
     }
 
-    private void Move()
-    {
-        
+    Vector3 GetInput() {
+        return (Vector3.ProjectOnPlane(viewer.forward, Vector3.down).normalized*Input.GetAxisRaw("Vertical") + viewer.right*Input.GetAxisRaw("Horizontal")).normalized;
     }
 
-    private void MoveCamera()
-    {
-        _xRotation += Input.GetAxisRaw("Mouse X") * _sensitivity;
-        _yRotation -= Input.GetAxisRaw("Mouse Y") * _sensitivity;
+    void Upright() {
+        Vector3 goal = (Vector3.down).normalized;
+        Vector3 current = transform.up;
+        Vector3 axis = Vector3.Cross(goal, current);
 
-        transform.rotation = Quaternion.Euler(0f, _xRotation, 0f);
-        _camera.localRotation = Quaternion.Euler(_yRotation, 0f, 0f);
+        Debug.Log(axis);
+        rb.AddTorque(axis*50, ForceMode.Force);
     }
 }
