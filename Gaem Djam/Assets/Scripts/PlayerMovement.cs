@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         rb.AddForce(GetInput() * moveSpeed, ForceMode.Acceleration); // Apply forces based off wasd
+        rb.AddForce(Vector3.down * rb.mass, ForceMode.Force); // Apply gravity
         Upright();
     }
 
