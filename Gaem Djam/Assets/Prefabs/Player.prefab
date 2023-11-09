@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5296728672282530492}
   - component: {fileID: 4371725643377255678}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2382462736907379140}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.6, z: 0}
+  m_LocalPosition: {x: 0, y: -0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 9184429416295429816}
   - component: {fileID: 9184429416295429817}
   - component: {fileID: 9184429416295429822}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 9184429416560996417}
   - component: {fileID: 9184429416560996416}
   - component: {fileID: 9184429416560996423}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,9 +287,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9184429416560996429}
   serializedVersion: 4
-  m_Mass: 160
-  m_Drag: 6
-  m_AngularDrag: 6
+  m_Mass: 150
+  m_Drag: 5
+  m_AngularDrag: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -330,8 +330,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46c72d13cc89fb4d86c01061649d1f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   moveSpeed: 80
   jumpForce: 2400
+  groundCheckMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &9184429416998766720
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +345,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9184429416998766727}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Viewer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9184429417263460174}
   - component: {fileID: 9184429417263460173}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,6 +420,6 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 1.9
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.05, z: 0}
