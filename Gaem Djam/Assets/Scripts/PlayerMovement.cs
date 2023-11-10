@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public PlayerState currentState = PlayerState.Idle;
+    [SerializeField] private KeyCode wallRunKey = KeyCode.F;
     [SerializeField] private float moveSpeed = 60f;
     [SerializeField] private float jumpForce = 2400f;
     [SerializeField] private LayerMask groundCheckMask;
@@ -29,12 +30,13 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         rb.AddForce(GetInput() * moveSpeed, ForceMode.Acceleration); // Apply forces based off wasd
+        HandleGroundCheck();
     }
 
     void Update()
     {
-        HandleGroundCheck();
-        if(Input.GetKeyDown(KeyCode.Space) && currentState == PlayerState.Walking) {Jump();}
+        if(Input.GetKeyDown(KeyCode.Space)) {Jump();}
+        if(Input.GetKeyDown(wallRunKey)) {WallRun();}
     }
 
     Vector3 GetInput() {
@@ -49,10 +51,19 @@ public class PlayerMovement : MonoBehaviour
             } else {
                 currentState = PlayerState.Jumping;
             }
+            Debug.Log(hit);
         }
     }
 
     void Jump() {
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        if(currentState == PlayerState.Walking) {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        } else if(currentState == PlayerState.WallRunning) {
+            Debug.Log("aaa");
+        }
+    }
+
+    void WallRun() {
+
     }
 }

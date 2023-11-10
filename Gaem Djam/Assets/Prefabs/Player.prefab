@@ -332,10 +332,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   moveSpeed: 80
-  jumpForce: 2400
+  jumpForce: 2000
   groundCheckMask:
     serializedVersion: 2
     m_Bits: 64
+  _up: {x: 0, y: 0, z: 0}
 --- !u!1 &9184429416998766720
 GameObject:
   m_ObjectHideFlags: 0
